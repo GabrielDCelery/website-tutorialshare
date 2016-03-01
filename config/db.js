@@ -16,6 +16,24 @@ var schema = {
 		name: 'name',
 		password: 'password',
 		email: 'email'
+	},
+	url: {
+		tablename: 'entry',
+		id: 'id',
+		url: 'url'
+	},
+	tag: {
+		tablename: 'tag',
+		id: 'id',
+		name: 'name'
+	},
+	user_entry: {
+		tablename: 'user_entry',
+		user_id: 'user_id',
+		url_id: 'url_id',
+		tag_id: 'tag_id',
+		title: 'title',
+		description: 'description'
 	}
 }
 
