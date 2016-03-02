@@ -1,8 +1,6 @@
-var LoginFactory = angular.module('LoginFactory', []);
+var DatabaseFactory = angular.module('DatabaseFactory', []);
 
-LoginFactory.factory('Login', ['$http', function($http){
-
-	var cachedUsernames;
+DatabaseFactory.factory('Database', ['$http', function($http){
 
 	function doesUserExist(input, callback){
 		$http.post('/auth/doesuserexist', input).then(function (response){
@@ -34,12 +32,19 @@ LoginFactory.factory('Login', ['$http', function($http){
 		})
 	}
 
+	function listLogs(callback){
+		$http.get('/log/list').then(function (response){
+			callback(response);
+		})
+	}
+
 	return {
 		doesUserExist: doesUserExist,
 		loginUser: loginUser,
 		registerUser: registerUser,
 		getResetMail: getResetMail,
-		resetPassword: resetPassword
+		resetPassword: resetPassword,
+		listLogs: listLogs
 	}
 
 }])

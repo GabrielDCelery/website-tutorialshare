@@ -2,10 +2,10 @@ var AddLogController = angular.module('AddLogController', []);
 
 AddLogController.controller('AddLogCtrl', [
 	'$scope', 
-	'Log', 
+	'Database', 
 	function(
 		$scope, 
-		Log
+		Database
 	){
 
 /*******************************************************************************

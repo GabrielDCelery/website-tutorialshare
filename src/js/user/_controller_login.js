@@ -5,14 +5,14 @@ LoginController.controller('LoginCtrl', [
 	'$http', 
 	'$localStorage', 
 	'Display', 
-	'Login',
+	'Database',
 	'FormValidation', 
 	function (
 		$scope, 
 		$http, 
 		$localStorage, 
 		Display,
-		Login,
+		Database,
 		FormValidation
 	){
 
@@ -56,7 +56,7 @@ FUNCTIONS - FORM - DATABASE
 		$scope.display.alert.passwordlength = FormValidation.isInputLongEnough($scope.data.form.password, 8);
 
 		if(FormValidation.canSendData($scope.display.alert)){
-			Login.loginUser(input, function (response){
+			Database.loginUser(input, function (response){
 
 				$scope.auth.username = $scope.data.form.username;
 				

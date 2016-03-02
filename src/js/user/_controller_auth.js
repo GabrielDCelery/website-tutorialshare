@@ -4,14 +4,12 @@ AuthController.controller('AuthCtrl', [
 	'$scope', 
 	'$http', 
 	'$location', 
-	'$localStorage', 
-	'Login', 
+	'$localStorage',
 	function (
 		$scope, 
 		$http, 
 		$location, 
-		$localStorage, 
-		Login
+		$localStorage
 	){
 
 /*******************************************************************************

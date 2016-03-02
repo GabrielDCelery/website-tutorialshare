@@ -2,19 +2,18 @@ var ListController = angular.module('ListController', []);
 
 ListController.controller('ListCtrl', [
 	'$scope', 
-	'Log', 
+	'Database', 
 	function(
 		$scope, 
-		Log
+		Database
 	){
 
 /*******************************************************************************
 VARIABLES
 *******************************************************************************/
 
-	Log.list(function (response){
+	Database.listLogs(function (response){
 		console.log(response.data.data)
-
 	})
 
 /*******************************************************************************
