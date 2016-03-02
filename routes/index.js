@@ -3,7 +3,7 @@ var router = express.Router();
 
 var auth = require('./auth');
 var test = require('./test');
-var entry = require('./entry');
+var log = require('./log');
 
 router.post('/auth/doesuserexist', auth.doesUserExist);
 router.post('/auth/login', auth.login);
@@ -11,6 +11,6 @@ router.post('/auth/register', auth.register);
 router.post('/auth/resetmail', auth.resetMail);
 router.post('/auth/reset', auth.reset);
 
-router.get('/log/list', entry.list)
+router.get('/log/list', log.list)
 
 module.exports = router;

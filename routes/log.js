@@ -8,7 +8,7 @@ var connection = globalRequire('config/db').connection;
 var secretPassword = globalRequire('config/db').secretPassword;
 var schema = globalRequire('config/db').schema;
 
-var entry = {
+var log = {
 
 	list: function (req, res){
 		var userId = mysql.escape(req.body.id);
@@ -72,4 +72,4 @@ var entry = {
 
 }
 
-module.exports = entry;
+module.exports = log;
