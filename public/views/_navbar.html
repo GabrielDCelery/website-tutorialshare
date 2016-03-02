@@ -11,6 +11,7 @@
 			<ul class="nav navbar-nav navbar-left">
 				<li><a href="/">LogIt</a></li>
 				<li ng-if="auth.loggedIn"><a href="/list">My logs</a></li>
+				<li ng-if="auth.loggedIn"><a href="/add">Add new</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li ng-if="!auth.loggedIn">

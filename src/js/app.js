@@ -13,7 +13,8 @@ var myApp = angular.module('myApp', [
 	'RegisterController',
 	'ResetController',
 	'ResetMailController',
-	'ListController'
+	'ListController',
+	'AddLogController'
 	]);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider){
@@ -41,6 +42,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 		.when('/list', {
 			templateUrl: 'views/log/_list.html',
 			controller: 'ListCtrl'
+		})
+		.when('/add', {
+			templateUrl: 'views/log/_add.html',
+			controller: 'AddLogCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'

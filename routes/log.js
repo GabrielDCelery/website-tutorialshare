@@ -10,6 +10,10 @@ var schema = globalRequire('config/db').schema;
 
 var log = {
 
+	add: function (req, res){
+
+	},
+
 	list: function (req, res){
 		var userId = mysql.escape(req.body.id);
 		var querystring = 'SELECT '+ 
