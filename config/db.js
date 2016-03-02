@@ -18,7 +18,7 @@ var schema = {
 		email: 'email'
 	},
 	url: {
-		tablename: 'entry',
+		tablename: 'url',
 		id: 'id',
 		url: 'url'
 	},
@@ -27,11 +27,16 @@ var schema = {
 		id: 'id',
 		name: 'name'
 	},
-	user_entry: {
-		tablename: 'user_entry',
+	tag_meta: {
+		tablename: 'tag_meta',
 		user_id: 'user_id',
 		url_id: 'url_id',
-		tag_id: 'tag_id',
+		tag_id: 'tag_id'
+	},
+	log: {
+		tablename: 'log',
+		user_id: 'user_id',
+		url_id: 'url_id',
 		title: 'title',
 		description: 'description'
 	}

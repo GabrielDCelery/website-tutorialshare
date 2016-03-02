@@ -7,11 +7,13 @@ var myApp = angular.module('myApp', [
 	'LoginFactory', 
 	'FormValidationFactory', 
 	'TokenFactory', 
+	'LogFactory', 
 	'AuthController', 
 	'LoginController',
 	'RegisterController',
 	'ResetController',
-	'ResetMailController'
+	'ResetMailController',
+	'ListController'
 	]);
 
 myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider){
@@ -35,6 +37,10 @@ myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function (
 		.when('/reset/:encrypteduserdata', {
 			templateUrl: 'views/auth/_reset.html',
 			controller: 'ResetCtrl'	
+		})
+		.when('/list', {
+			templateUrl: 'views/log/_list.html',
+			controller: 'ListCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'

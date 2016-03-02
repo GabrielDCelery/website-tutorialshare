@@ -22,7 +22,7 @@ app.all('*', function (req, res, next){
 	next();
 })
 
-app.all('/test', token.verify);
+app.all('/log/*', token.verify);
 
 app.use('/', routes);
 

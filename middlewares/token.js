@@ -16,17 +16,19 @@ var token = {
 		/*var key = (req.body && req.body.x_key) || (req.query && req.query.x_key) || req.headers['x-key'];*/
 		jwt.verify(token, secretPassword, function (err, decoded){
 			if(err) {
-				console.log(err.message)
+
 				res.json({
 					success: false, 
 					message: 'Failed to authenticate token!'
 				})	
 
 			} else {
-				var username = mysql.escape(decoded.username);
-				var email = mysql.escape(decoded.email);
+
+				var username = mysql.escape(decoded[schema.user.name]);
+				var email = mysql.escape(decoded[schema.user.email]);
 				var password = decoded.password;
 				var querystring = 'SELECT ' + schema.user.id + ', ' + schema.user.password + ' FROM ' + schema.user.tablename + ' WHERE ' + schema.user.name + ' = ' + username + ' AND ' + schema.user.email + ' = ' + email;
+				
 				connection.query(querystring, function (err, rows) {
 					if (err){
 						res.json({
@@ -44,7 +46,7 @@ var token = {
 							message: 'Wrong password!'
 						});
 					} else {
-						req.body.id = rows[0].id;
+						req.body.id = decoded.id;
 						next();
 					}
 				});
