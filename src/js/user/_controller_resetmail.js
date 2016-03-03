@@ -49,7 +49,7 @@ FUNCTIONS - FORM - DATABASE
 
 	function getResetMail(input){
 
-		$scope.display.alert.emailvalid = FormValidation.isEmailValid($scope.data.form.email);
+		$scope.display.alert.emailvalid = !FormValidation.isEmailValid($scope.data.form.email);
 
 		if(FormValidation.canSendData($scope.display.alert)){
 			Database.getResetMail(input, function (response){

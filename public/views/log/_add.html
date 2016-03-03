@@ -2,57 +2,75 @@
 	<div class="form-group">
 		<label class="col-sm-1 control-label" for="logTitle">Title</label>
 		<div class="col-sm-11">
-			<input type="text" class="form-control" id="logTitle">
+			<input type="text" class="form-control" id="logTitle" ng-model="data.form.title">
 		</div>
 	</div>
+
+	<div class="col-sm-11 col-sm-offset-1 alert alert-danger" ng-if="display.alert.titletooshort">Title has to contain atleast 8 characters!</div>
+	<div class="col-sm-11 col-sm-offset-1 alert alert-danger" ng-if="display.alert.titletoolong">Title cannot be longer than 25 characters!</div>
+
 	<div class="form-group">
 		<label class="col-sm-1 control-label" for="logUrl">URL</label>
 		<div class="col-sm-11">
-			<input type="text" class="form-control" id="logUrl">
+			<input type="text" class="form-control" id="logUrl" ng-model="data.form.url">
 		</div>
 	</div>
+
+	<div class="col-sm-11 col-sm-offset-1 alert alert-danger" ng-if="display.alert.urlnotvalid">Url format not valid!</div>
+
 	<div class="form-group">
 		<label class="col-sm-1 control-label" for="logDesc">Description</label>
 		<div class="col-sm-11">
-			<textarea class="form-control" rows="3"id="logDesc"></textarea>
+			<textarea class="form-control" rows="3"id="logDesc" ng-model="data.form.description"></textarea>
 		</div>
 	</div>
+
+	<div class="col-sm-11 col-sm-offset-1 alert alert-danger" ng-if="display.alert.descriptiontooshort">Description has to be minimum 10 characters long!</div>
+	<div class="col-sm-11 col-sm-offset-1 alert alert-danger" ng-if="display.alert.descriptiontoolong">Description cannot be longer than 140 characters!</div>
+
 	<div class="form-group">
 		<label class="col-sm-1 control-label" for="logTag">Tag</label>
 		<div class="col-sm-6">
-			<input type="text" class="form-control" id="logTag">
+			<input type="text" class="form-control" id="logTag" ng-model="data.form.addtag">
 		</div>
 		<div class="col-sm-5">
 			<div class="btn-group btn-group-justified">
 				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-info">ADD TAG</button>
+					<button type="button" class="btn btn-info" ng-click="addTag(data.form.addtag, data.form.tags)">ADD TAG</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-sm-2 col-sm-offset-1">
-			<input type="text" class="form-control" disabled>
+			<input type="text" class="form-control" ng-model="data.form.tags[0]" disabled>
 		</div>
 		<div class="col-sm-2">
-			<input type="text" class="form-control" disabled>
+			<input type="text" class="form-control" ng-model="data.form.tags[1]" disabled>
 		</div>
 		<div class="col-sm-2">
-			<input type="text" class="form-control" disabled>
+			<input type="text" class="form-control" ng-model="data.form.tags[2]" disabled>
 		</div>
 		<div class="col-sm-5">
 			<div class="btn-group btn-group-justified">
 				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-info">REMOVE TAG</button>
+					<button type="button" class="btn btn-info" ng-click="removeTag(data.form.tags)">REMOVE TAG</button>
 				</div>
 			</div>	
 		</div>	
 	</div>
+
+	<div class="col-sm-11 col-sm-offset-1 alert alert-danger" ng-if="display.alert.invalidtagformat">The tag cannot contain whitespaces or special characters!</div>
+	<div class="col-sm-11 col-sm-offset-1 alert alert-danger" ng-if="display.alert.duplicatetag">Tag already exists!</div>
+	<div class="col-sm-11 col-sm-offset-1 alert alert-danger" ng-if="display.alert.tagtooshort">Tag has to be minimum 3 characters long!</div>
+	<div class="col-sm-11 col-sm-offset-1 alert alert-danger" ng-if="display.alert.tagtoolong">Tag cannot be longer than 15 characters!</div>
+	<div class="col-sm-11 col-sm-offset-1 alert alert-danger" ng-if="display.alert.needtags">You have to add atleast one tag!</div>
+
 	<div class="form-group">
 		<div class="col-sm-11 col-sm-offset-1">
 			<div class="btn-group btn-group-justified">
 				<div class="btn-group btn-group-lg" role="group">
-					<button type="button" class="btn btn-primary">ADD LOG</button>
+					<button type="button" class="btn btn-primary" ng-click="addLog(data.form)">ADD LOG</button>
 				</div>
 			</div>
 		</div>

@@ -52,8 +52,8 @@ FUNCTIONS - FORM - DATABASE
 
 	function loginUser(input){
 
-		$scope.display.alert.usernamelength = FormValidation.isInputLongEnough($scope.data.form.username, 5);
-		$scope.display.alert.passwordlength = FormValidation.isInputLongEnough($scope.data.form.password, 8);
+		$scope.display.alert.usernamelength = !FormValidation.isInputLongEnough($scope.data.form.username, 5);
+		$scope.display.alert.passwordlength = !FormValidation.isInputLongEnough($scope.data.form.password, 8);
 
 		if(FormValidation.canSendData($scope.display.alert)){
 			Database.loginUser(input, function (response){

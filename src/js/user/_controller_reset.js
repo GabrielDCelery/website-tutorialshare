@@ -54,8 +54,8 @@ FUNCTIONS - FORM - DATABASE
 	function resetPassword(input){
 		input.encrypteduserdata = $routeParams.encrypteduserdata;
 
-		$scope.display.alert.passwordlength = FormValidation.isInputLongEnough($scope.data.form.newpassword, 8);
-		$scope.display.alert.passwordsmatching = FormValidation.areInputsMatching($scope.data.form.newpassword, $scope.data.form.confirmnewpassword);
+		$scope.display.alert.passwordlength = !FormValidation.isInputLongEnough($scope.data.form.newpassword, 8);
+		$scope.display.alert.passwordsmatching = !FormValidation.areInputsMatching($scope.data.form.newpassword, $scope.data.form.confirmnewpassword);
 
 		if(FormValidation.canSendData($scope.display.alert)){
 			Database.resetPassword(input, function (response){

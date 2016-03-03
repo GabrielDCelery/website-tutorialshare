@@ -72,10 +72,10 @@ FUNCTIONS - FORM - DATABASE
 
 	function registerUser(input){
 
-		$scope.display.alert.emailvalid = FormValidation.isEmailValid($scope.data.form.email);
-		$scope.display.alert.usernamelength = FormValidation.isInputLongEnough($scope.data.form.username, 5);
-		$scope.display.alert.passwordlength = FormValidation.isInputLongEnough($scope.data.form.password, 8);
-		$scope.display.alert.passwordsmatching = FormValidation.areInputsMatching($scope.data.form.password, $scope.data.form.passwordconfirm);
+		$scope.display.alert.emailvalid = !FormValidation.isEmailValid($scope.data.form.email);
+		$scope.display.alert.usernamelength = !FormValidation.isInputLongEnough($scope.data.form.username, 5);
+		$scope.display.alert.passwordlength = !FormValidation.isInputLongEnough($scope.data.form.password, 8);
+		$scope.display.alert.passwordsmatching = !FormValidation.areInputsMatching($scope.data.form.password, $scope.data.form.passwordconfirm);
 
 		doesUserAlreadyExist(input, function(){
 			if(FormValidation.canSendData($scope.display.alert)){
