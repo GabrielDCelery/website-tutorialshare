@@ -38,13 +38,20 @@ DatabaseFactory.factory('Database', ['$http', function($http){
 		})
 	}
 
+	function addLog(input, callback){
+		$http.post('/log/add', input).then(function (response){
+			callback(response);
+		})
+	}
+
 	return {
 		doesUserExist: doesUserExist,
 		loginUser: loginUser,
 		registerUser: registerUser,
 		getResetMail: getResetMail,
 		resetPassword: resetPassword,
-		listLogs: listLogs
+		listLogs: listLogs,
+		addLog: addLog
 	}
 
 }])

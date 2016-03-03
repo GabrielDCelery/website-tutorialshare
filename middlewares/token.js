@@ -46,7 +46,7 @@ var token = {
 							message: 'Wrong password!'
 						});
 					} else {
-						req.body.id = decoded.id;
+						req.body.userId = decoded.id;
 						next();
 					}
 				});

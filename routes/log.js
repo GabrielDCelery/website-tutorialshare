@@ -11,11 +11,11 @@ var schema = globalRequire('config/db').schema;
 var log = {
 
 	add: function (req, res){
-
+		console.log(req.body)
 	},
 
 	list: function (req, res){
-		var userId = mysql.escape(req.body.id);
+		var userId = mysql.escape(req.body.userId);
 		var querystring = 'SELECT '+ 
 			schema.user.tablename + '.' + schema.user.id + ' AS user_id, ' + 
 			schema.url.tablename + '.' + schema.url.id + ' AS url_id, ' + 

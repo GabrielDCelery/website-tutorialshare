@@ -95,7 +95,9 @@ FUNCTIONS
 		$scope.display.alert.needtags = FormValidation.isArrayEmpty(input.tags);
 
 		if(FormValidation.canSendData($scope.display.alert)){
-			console.log('send data...')
+			Database.addLog(input, function (response){
+				console.log(response);
+			})
 		}
 	}
 
