@@ -5,6 +5,7 @@ var globalRequire = require('./global_require.js'); // globally require modules 
 
 var routes = require('./routes');
 var token = require('./middlewares/token');
+var hashKey = require('./middlewares/hashkey');
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.all('*', function (req, res, next){
 	next();
 })
 
+app.all('/log/*', hashKey.add);
 app.all('/log/*', token.verify);
 
 app.use('/', routes);

@@ -11,7 +11,8 @@ var schema = globalRequire('config/db').schema;
 var log = {
 
 	add: function (req, res){
-		console.log(req.body)
+		console.log(req.body);
+
 	},
 
 	list: function (req, res){
