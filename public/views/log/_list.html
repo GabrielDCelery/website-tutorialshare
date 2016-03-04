@@ -1,13 +1,39 @@
 <table class="table table-striped">
 	<tr>
-		<td><button type="button" class="btn btn-default btn-xs">#</button></td>
-		<td>TITLE</td>
-		<td>DESCRIPTION</td>
-		<td>TAG</td>
-		<td>URL</td>
+		<td></td>
+		<td ng-click="orderList('title')">TITLE</td>
+		<td ng-click="orderList('description')">DESCRIPTION</td>
+		<td ng-click="orderList('tags')">TAG</td>
+		<td ng-click="orderList('url')">URL</td>
 		<td>VISIT</td>
 	</tr>
-	<tr ng-repeat="log in logs">
+	<tr>
+		<td>
+			<button type="button" class="btn btn-default">#</button>
+		</td>
+		<td>
+			<div class="form-group">
+				<input type="text" class="form-control" ng-model="searchParams.title">
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<input type="text" class="form-control" ng-model="searchParams.description">
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<input type="text" class="form-control" ng-model="searchParams.tags">
+			</div>
+		</td>
+		<td>
+			<div class="form-group">
+				<input type="text" class="form-control" ng-model="searchParams.url">
+			</div>
+		</td>
+		<td></td>
+	</tr>
+	<tr ng-repeat="log in logs | orderBy:listOrder:reverseList | filter:searchParams">
 		<td>
 			<input type="checkbox">
 		</td>
@@ -16,7 +42,7 @@
 		<td>{{log.tags[0]}}</td>
 		<td>
 			<div class="form-group">
-				<input type="email" class="form-control" placeholder="{{log.url}}" disabled>
+				<input type="text" class="form-control" placeholder="{{log.url}}" disabled>
 			</div>
 		</td>
 		<td><a href="{{log.url}}" target="_blank" type="button" class="btn btn-primary">VISIT</a></td>
