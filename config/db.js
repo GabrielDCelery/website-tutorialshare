@@ -6,7 +6,8 @@ var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
 	password : null,
-	database : 'tutorialshare'
+	database : 'tutorialshare',
+	multipleStatements: true
 });
 
 var schema = {

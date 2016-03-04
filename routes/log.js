@@ -11,8 +11,63 @@ var schema = globalRequire('config/db').schema;
 var log = {
 
 	add: function (req, res){
-		console.log(req.body);
 
+		var userId = req.body.userId;
+		var title = mysql.escape(req.body.title);
+		var description = mysql.escape(req.body.description);
+		var url = mysql.escape(req.body.url);
+		var urlHashKey = mysql.escape(req.body.urlHashKey);
+		/* Demo version only adds one tag */
+		var tag = mysql.escape(req.body.tags[0]);
+		var tagHashKey = mysql.escape(req.body.tagsHashKeys[0]);
+
+		var querystring = 'CALL addUrl(' + urlHashKey + ', ' + url + ', @urlId); SELECT @urlId AS urlId;';
+		
+		connection.query(querystring, function (err, result){
+			if (err) {
+				res.json({
+					success: false,
+					message: 'There was an error while connecting to the database!'
+				});
+			} else {
+				var urlId = result[1][0]['urlId'];
+				var querystring = 'CALL addTags(' + tagHashKey + ', ' + tag + ', @tagId); SELECT @tagId AS tagId;';
+				
+				connection.query(querystring, function (err, result){
+					if (err) {
+						res.json({
+							success: false,
+							message: 'There was an error while connecting to the database!'
+						});
+					} else {
+						var tagId = result[1][0]['tagId'];
+						var querystring = 'CALL addLog(' + userId + ', ' + urlId + ', ' + tagId + ', ' + title + ', ' + description + ', @successfullyAdded); SELECT @successfullyAdded AS successfullyAdded;';	
+						
+						connection.query(querystring, function (err, result){
+							if (err){
+								res.json({
+									success: false,
+									message: 'There was an error while connecting to the database!'
+								});	
+							} else {
+								var successfullyAdded = result[1][0]['successfullyAdded'];
+								if(successfullyAdded == 1){
+									res.json({
+										success: true,
+										message: 'Log addedd successfully!'
+									});	
+								} else {
+									res.json({
+										success: false,
+										message: 'Duplicate link!'
+									});	
+								}
+							}
+						})
+					}
+				})
+			}
+		})
 	},
 
 	list: function (req, res){

@@ -68,7 +68,7 @@ FUNCTIONS
 		var tagNotValid = $scope.display.alert.invalidtagformat = !FormValidation.isTagValid(input);
 		var tagTooShort = $scope.display.alert.tagtooshort = !FormValidation.isInputLongEnough(input, 3);
 		var duplicateTag = $scope.display.alert.duplicatetag = FormValidation.duplicateData(input, array);
-		var tagTooLong = $scope.display.alert.tagtoolong = FormValidation.isInputTooLong(input, 15);
+		var tagTooLong = $scope.display.alert.tagtoolong = FormValidation.isInputTooLong(input, 20);
 
 		if(!(tagNotValid || tagTooShort || duplicateTag || tagTooLong)){
 			array.push(input.toLowerCase());
@@ -96,7 +96,15 @@ FUNCTIONS
 
 		if(FormValidation.canSendData($scope.display.alert)){
 			Database.addLog(input, function (response){
-				console.log(response);
+				if(response.data.success){
+					$scope.data.success.message = response.data.message;
+					$scope.display.page.error = false;
+					$scope.display.page.success = true;
+				} else {
+					$scope.data.error.message = response.data.message;
+					$scope.display.page.success = false;
+					$scope.display.page.error = true;
+				}
 			})
 		}
 	}

@@ -1,0 +1,65 @@
+
+/*****************************************************************************
+ADDING NEW URL TO URL ABLE
+*****************************************************************************/
+
+DELIMITER //
+CREATE PROCEDURE addUrl(
+IN hashKey INT(11), 
+IN urlString VARCHAR(255), 
+OUT url_id INT)
+BEGIN
+IF(
+SELECT NOT EXISTS (SELECT id, url FROM (SELECT id, url FROM url WHERE hash_key = hashKey) AS hash_table WHERE url = urlString)
+) THEN
+INSERT INTO url (url, hash_key) VALUES (urlString, hashKey);
+SET url_id = LAST_INSERT_ID();
+ELSE SET url_id = (SELECT id FROM (SELECT id, url FROM url WHERE hash_key = hashKey) AS hash_table WHERE url = urlString);
+END IF;
+END //
+DELIMITER;
+
+/*****************************************************************************
+ADDING NEW TAG TO TAG TABLE
+*****************************************************************************/
+
+DELIMITER //
+CREATE PROCEDURE addTag(
+IN hashKey INT(11), 
+IN tagName VARCHAR(255), 
+OUT tag_id INT)
+BEGIN
+IF(
+SELECT NOT EXISTS (SELECT id, name FROM (SELECT id, name FROM tag WHERE hash_key = hashKey) AS hash_table WHERE name = tagName)
+) THEN
+INSERT INTO tag (name, hash_key) VALUES (tagName, hashKey);
+SET tag_id = LAST_INSERT_ID();
+ELSE SET tag_id = (SELECT id FROM (SELECT id, name FROM tag WHERE hash_key = hashKey) AS hash_table WHERE name = tagName);
+END IF;
+END //
+DELIMITER;
+
+/*****************************************************************************
+ADDING NEW LOG TO LOG TABLE AND TAG TO TAG META
+*****************************************************************************/
+
+DELIMITER //
+CREATE PROCEDURE addLog(
+IN userId INT(11),
+IN urlId INT(11),
+IN tagId INT(11),
+IN titleString VARCHAR(255),
+IN descriptionString VARCHAR(255),
+OUT successfullyAdded INT(11)
+)
+BEGIN
+IF(
+SELECT NOT EXISTS(SELECT user_id, url_id, title, description FROM log WHERE user_id = userId AND url_id = urlId)
+) THEN 
+INSERT INTO log (user_id, url_id, title, description) VALUES (userId, urlId, titleString, descriptionString);
+INSERT INTO tag_meta (user_id, url_id, tag_id) VALUES (userId, urlId, tagId);
+SET successfullyAdded = 1;
+ELSE SET successfullyAdded = 0;
+END IF;
+END //
+DELIMITER;
