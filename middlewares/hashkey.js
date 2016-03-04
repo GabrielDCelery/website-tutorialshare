@@ -7,11 +7,12 @@ function generateHashKey(string){
 var hashKey = {
 
 	add: function(req, res, next){
+
 		if(req.body.url){
 			req.body.urlHashKey = generateHashKey(req.body.url);
 		}
 
-		if(req.body.tags.length > 0){
+		if(req.body.tags){
 			req.body.tagsHashKeys = req.body.tags.map(generateHashKey);
 		}
 
