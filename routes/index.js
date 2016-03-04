@@ -13,5 +13,6 @@ router.post('/auth/reset', auth.reset);
 
 router.get('/log/list', log.list);
 router.post('/log/add', log.add);
+router.post('/log/delete', log.delete);
 
 module.exports = router;

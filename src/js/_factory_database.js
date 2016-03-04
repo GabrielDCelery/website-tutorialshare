@@ -44,6 +44,12 @@ DatabaseFactory.factory('Database', ['$http', function($http){
 		})
 	}
 
+	function deleteLogs(input, callback){
+		$http.post('/log/delete', input).then(function (response){
+			callback(response);
+		})
+	}
+
 	return {
 		doesUserExist: doesUserExist,
 		loginUser: loginUser,
@@ -51,7 +57,8 @@ DatabaseFactory.factory('Database', ['$http', function($http){
 		getResetMail: getResetMail,
 		resetPassword: resetPassword,
 		listLogs: listLogs,
-		addLog: addLog
+		addLog: addLog,
+		deleteLogs: deleteLogs
 	}
 
 }])

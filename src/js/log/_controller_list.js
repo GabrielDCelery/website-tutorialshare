@@ -2,15 +2,29 @@ var ListController = angular.module('ListController', []);
 
 ListController.controller('ListCtrl', [
 	'$scope', 
+	'$location', 
 	'Database', 
 	function(
 		$scope, 
+		$location, 
 		Database
 	){
 
 /*******************************************************************************
 VARIABLES
 *******************************************************************************/
+
+	$scope.data = {
+		error: {
+			message: ''
+		}
+	}
+
+	$scope.display = {
+		page: {
+			error: false
+		}
+	}
 
 	$scope.logs = [];
 
@@ -30,16 +44,36 @@ FUNCTIONS
 		$scope.reverseList = !$scope.reverseList;
 	}
 
-	Database.listLogs(function (response){
-		console.log(response.data.data)
-		$scope.logs = response.data.data;
-	})
+	function deleteLogs(logs){
+		Database.deleteLogs(logs, function (response){
+			if(response.data.success){
+				$scope.display.page.error = false;
+				listLogs();
+			} else {
+				$scope.data.error.message = response.data.message;
+				$scope.display.page.error = true;
+			}
+		})
+	}
+
+	function listLogs(){
+		Database.listLogs(function (response){
+			$scope.logs = response.data.data;
+		})	
+	}
+
+/*******************************************************************************
+INITIATE FUNCTION UPON LOADING
+*******************************************************************************/
+
+	listLogs();
 
 /*******************************************************************************
 BINDING FUNCTIONS
 *******************************************************************************/
 	
 	$scope.orderList = orderList;
+	$scope.deleteLogs = deleteLogs;
 
 
 }])

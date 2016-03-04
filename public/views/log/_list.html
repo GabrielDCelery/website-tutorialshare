@@ -1,3 +1,7 @@
+<div class="alert alert-danger" ng-if="display.page.error">
+	<strong>{{data.error.message}}</strong>
+</div>
+
 <table class="table table-striped">
 	<tr>
 		<td></td>
@@ -48,3 +52,12 @@
 	</tr>
 
 </table>
+
+<div class="btn-group btn-group-justified" role="group">
+	<div class="btn-group" role="group">
+		<button type="button" class="btn btn-primary">EDIT SELECTED</button>
+	</div>
+	<div class="btn-group" role="group">
+		<button type="button" class="btn btn-primary" ng-click="deleteLogs(checklist.logs)">DELETE SELECTED</button>
+	</div>
+</div>

@@ -128,8 +128,41 @@ var log = {
 
 		})
 
-	}
+	},
 
+	delete: function(req, res){
+
+		var urlId = req.body[0].url_id;
+		var userId = req.body.userId;
+
+		var querystring = 'DELETE ' + 
+			schema.log.tablename + ', ' + schema.tag_meta.tablename +
+			' FROM ' + schema.log.tablename + ' INNER JOIN ' + schema.tag_meta.tablename + 
+			' ON ' + schema.log.tablename + '.' + schema.log.user_id + ' = ' + schema.tag_meta.tablename + '.' + schema.tag_meta.user_id +
+			' AND ' + schema.log.tablename + '.' + schema.log.url_id + ' = ' + schema.tag_meta.tablename + '.' + schema.tag_meta.url_id +
+			' WHERE ' + schema.log.tablename + '.' + schema.log.user_id + ' = ' + userId +
+			' AND ' + schema.log.tablename + '.' + schema.log.url_id + ' = ' + urlId;
+
+		if(req.body.length > 1){
+			for(var i = 1; i < req.body.length; i++){
+				querystring += ' OR ' + schema.log.tablename + '.' + schema.log.url_id + ' = ' + req.body[i].url_id;
+			}
+		}
+
+		connection.query(querystring, function (err, result){
+			if (err){
+				res.json({
+					success: false,
+					message: 'There was an error while connecting to the database!'
+				});	
+			} else {
+				res.json({
+					success: true,
+					message: 'Selected logs successfully deleted!'
+				});	
+			}
+		})	
+	}
 }
 
 module.exports = log;
