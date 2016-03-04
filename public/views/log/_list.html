@@ -9,7 +9,6 @@
 	</tr>
 	<tr>
 		<td>
-			<button type="button" class="btn btn-default">#</button>
 		</td>
 		<td>
 			<div class="form-group">
@@ -35,7 +34,7 @@
 	</tr>
 	<tr ng-repeat="log in logs | orderBy:listOrder:reverseList | filter:searchParams">
 		<td>
-			<input type="checkbox">
+			<input type="checkbox" checklist-model="checklist.logs" checklist-value="log">
 		</td>
 		<td>{{log.title}}</td>
 		<td>{{log.description}}</td>

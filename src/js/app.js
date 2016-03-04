@@ -3,6 +3,7 @@ console.log("app is running...");
 var myApp = angular.module('myApp', [
 	'ngRoute',
 	'ngStorage', 
+	'checklist-model', 
 	'DisplayFactory', 
 	'DatabaseFactory', 
 	'FormValidationFactory', 

@@ -17,6 +17,14 @@ VARIABLES
 	$scope.listOrder = 'title';
 	$scope.reverseList = false;
 
+	$scope.checklist = {
+		logs: []
+	}
+
+/*******************************************************************************
+FUNCTIONS
+*******************************************************************************/
+
 	function orderList(string){
 		$scope.listOrder = string;
 		$scope.reverseList = !$scope.reverseList;
